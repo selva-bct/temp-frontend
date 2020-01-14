@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 // custom components
-import { Login, Signup, EditSignup, PasswordSetup } from './../container'
+import { Login, Signup, EditSignup, PasswordSetup, Dashboard } from './../container'
 
 export const AuthRoute = () => (
   <Switch>
@@ -16,6 +16,7 @@ export const AuthRoute = () => (
     <Route exact path='/auth/signup/:token' component={Signup}></Route>
     <Route exact path='/auth/signup/edit/:token' component={EditSignup}></Route>
     <Route path='/auth/signup/correct/:token' component={PasswordSetup}></Route>
+    <Route path='/dashboard' component={Dashboard}></Route>
     
     <Redirect to='/auth/login'></Redirect>
   </Switch>
