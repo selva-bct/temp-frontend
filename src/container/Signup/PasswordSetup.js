@@ -2,14 +2,16 @@ import React from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
 
 import { parseJwt } from '../../utils/jwt-util';
 import './signup.scss';
+import { REGISTER_REQUESTING } from '../../constant/auth.constant';
 
 export const PasswordSetup = () => {
   const history = useHistory();
   const { token, updatedToken } = useParams();
-
+  const dispatch = useDispatch()
   // decoded data
   let data = {}
   try {
@@ -24,10 +26,10 @@ export const PasswordSetup = () => {
     mode: 'onBlur',
     reValidateMode: 'onChange',
     defaultValues: {
-      password: data.password,
-      confirmPassword: data.confirmPassword,
-      termAndCondition: true,
-      subscribe: false
+      password: 'Test@123'|| data.password,
+      confirmPassword: 'Test@123' || data.confirmPassword,
+      termsAndCondition: false,
+      subscribe: true
     },
     validationSchema: yup.object().shape({
       password: yup.string().required('Please enter password'),
@@ -41,9 +43,13 @@ export const PasswordSetup = () => {
     nativeValidation: false,
   })
   console.log('error :: ', errors)
-  const onSubmit = data => { 
-    console.log(data);
-    alert('Not yet implemented') }
+  const onSubmit = formData => { 
+    data.name = 'selva'
+    data.email = 'selvanathan.v@bahwancybertek.com'
+    console.log({ ...formData, ...data });
+    
+    dispatch({ type: REGISTER_REQUESTING, data: { ...formData, ...data } })
+  }
 
   return (
     <div className='container'>
@@ -51,7 +57,8 @@ export const PasswordSetup = () => {
 
         <div className='form-group'>
           <label className='form-label' htmlFor="password">Password</label>
-          <input className='form-input' id="password" type="password" name="password" placeholder="password" ref={register} />
+          <input className='form-input' id="password" type="password" name="password" 
+          placeholder="password" ref={register} />
           <span className='error'>
             {errors.password && <div>{errors.password.message}</div>}
           </span>
@@ -59,7 +66,8 @@ export const PasswordSetup = () => {
 
         <div className='form-group'>
           <label className='form-label' htmlFor="confirmPassword">Confirm Password</label>
-          <input className='form-input' id="confirmPassword" type="password" name="confirmPassword" placeholder="confirm password" ref={register} />
+          <input className='form-input' id="confirmPassword" type="password" 
+          name="confirmPassword" placeholder="confirm password" ref={register} />
           <span className='error'>
             {errors.confirmPassword && <div> {errors.confirmPassword.message} </div>}
           </span>
@@ -67,8 +75,10 @@ export const PasswordSetup = () => {
 
         <div className='form-group'>
           <label>
-          <input className='form-input' id="termsAndCondition" type="checkbox" name="termsAndCondition"  ref={register} />
-            <span>I have read the Terms & Conditions. In checking this, I consent to use the Genomic Health Exchange.</span>
+          <input className='form-input' id="termsAndCondition" type="checkbox" 
+          name="termsAndCondition"  ref={register} />
+            <span>I have read the Terms & Conditions. In checking this, I consent 
+              to use the Genomic Health Exchange.</span>
           </label>
           <span className='error'>
             {errors.termsAndCondition && <div> {errors.termsAndCondition.message}</div>}
@@ -77,15 +87,18 @@ export const PasswordSetup = () => {
 
         <div className='form-group'>
           <label>
-          <input className='form-input' id="subscribe" type="checkbox" name="subscribe" ref={register} />
-            <span>I  want to be notified of opportunities to participate in future research (you can change your mind at any time.</span>
+          <input className='form-input' id="subscribe" type="checkbox" name="subscribe" 
+          ref={register} />
+            <span>I  want to be notified of opportunities to participate in future 
+              research (you can change your mind at any time.</span>
           </label>
           <span className='error'>
             {errors.subscribe && <div>{errors.subscribe.message}</div>}
           </span>
         </div>
 
-        <input type='submit'className='correct'value='Create Account'/>
+        <input type='submit' className='correct' value='Create Account' />
+        <input type='reset'className='correct' value='Reset'/>
       </form >
     </div>
   )

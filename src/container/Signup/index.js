@@ -1,8 +1,8 @@
 import {
   Signup
 } from './Signup';
-import { EditSignup } from './edit-signup';
-import { PasswordSetup } from './password-setup'
+import { EditSignup } from './EditSignup';
+import { PasswordSetup } from './PasswordSetup'
 
 export {
   Signup,

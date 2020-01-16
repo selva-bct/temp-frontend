@@ -1,5 +1,7 @@
-import { Login } from './Login';
+import { Login } from './Login/Login';
 import { Dashboard } from './Dashboard';
+import { ChangePassword } from './Change-password/Change-password';
+import { ForgotPassword } from './Forgot-password/Forgot-password';
 import { Signup, EditSignup, PasswordSetup } from './Signup';
 
 export {
@@ -7,5 +9,7 @@ export {
   Signup,
   EditSignup,
   PasswordSetup,
-  Dashboard
-}
+  Dashboard,
+  ForgotPassword,
+  ChangePassword
+};

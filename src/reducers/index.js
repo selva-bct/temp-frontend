@@ -1,5 +1,5 @@
-import clientReducer from './client.reducer';
-import loginReducer from './login.reducer';
+import clientReducer from './client-reducer';
+import loginReducer from './auth-reducer';
 
 import { combineReducers } from 'redux';
 

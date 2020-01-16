@@ -11,11 +11,11 @@ const constant = {
     }
     return result
   },
-  login: '/auth/login',
-  register: '/auth/register',
-  logout: '/auth/logout',
-  changePassword: '/auth/change-password',
-  forgotPassword: '/auth/forgot-password',
+  login: '/users/login',
+  register: '/users',
+  logout: '/users/logout',
+  changePassword: '/users/change-password',
+  forgotPassword: '/users/forgot-password',
   dashboard: '/dashboard'
 }
 

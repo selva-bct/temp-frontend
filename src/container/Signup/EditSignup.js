@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup';
 
-import { parseJwt } from './../../utils/jwt-util';
+import { parseJwt } from '../../utils/jwt-util';
 import './signup.scss';
 
 export const EditSignup = () => {
@@ -49,7 +49,7 @@ export const EditSignup = () => {
     submitFocusError: true,
     nativeValidation: false,
   })
-  const onSubmit = data => { console.log(data) }
+  const onSubmit = data => { console.log(data); }
 
   return (
     <div className='container'>

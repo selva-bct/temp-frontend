@@ -1,4 +1,4 @@
-import { CLIENT_SET, CLIENT_UNSET } from './../constant/client.constant'
+import { CLIENT_SET, CLIENT_UNSET } from '../constant/client.constant'
 
 const initialSate = {
   id: null,
@@ -9,7 +9,7 @@ const clientReducer = function clientReducer(state = initialSate, action) {
   switch (action.type) {
     case CLIENT_SET:
       return {
-        id: 'dsd',
+        id: 'dsd', // need to update 
         token: action,
       }
 
