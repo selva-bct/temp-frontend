@@ -25,7 +25,7 @@ export const AuthRoute = () => (
     <Route exact path='/auth/signup/edit/:token' component={EditSignup}></Route>
     <Route exact path='/auth/change-password' component={ChangePassword}></Route>
     <Route exact path='/auth/forgot-password' component={ForgotPassword}></Route>
-    <Route path='/auth/signup/password/:token' component={PasswordSetup}></Route>
+    <Route path='/auth/signup/password/:token/:updatedToken' component={PasswordSetup}></Route>
     <Route path='/dashboard' component={Dashboard}></Route>
     
     <Redirect to='/auth/login'></Redirect>

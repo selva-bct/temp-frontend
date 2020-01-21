@@ -1,13 +1,25 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { useHistory } from "react-router-dom";
 import * as yup from 'yup';
 
 import './Login.scss';
 import { LOGIN_REQUESTING } from './../../constant/auth.constant';
 export const Login = () => {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const state = useSelector(state => (state.auth.login));
+  
+  // checks if the user has logged in
+  useEffect(() => {
+    if (state.successful !== null && state.successful) {
+      console.log('-=-=-=-=-==- login -=-==-=')
+      dispatch({ type: 'AUTH_INITIALIZE'})
+      history.push('/dashboard');
+    }
+  });
   
   const { register, handleSubmit, errors } = useForm({
     mode: 'onBlur',

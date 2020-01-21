@@ -8,12 +8,16 @@ import './signup.scss';
 export const Signup = () => {
   const history = useHistory();
   // const { token } = useParams();
-  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyVHlwZSI6IlBhdGllbnQiLCJmaXJzdE5hbWUiOiJQYXRpZW5jZSIsImxhc3ROYW1lIjoiUGVhcnNvbiIsImVtYWlsIjoicGF0aWVuY2UucGVhcnNvbkBjb21wYW55LmNvbSIsImFkZHJlc3MxIjoiMTIzIEZyYW5jaXNjYW4gQmx2ZCIsImFkZHJlc3MyIjoiIiwiY2l0eSI6IlNhbiBGcmFuY2lzY28iLCJzdGF0ZSI6IkNBIiwicGluY29kZSI6Ijk0MDAxIiwianRpIjoiYjk2NTI4YjMtNTNkZi00ZjM3LWFiOGYtZDVkMzJiNGUzYmY5IiwiaWF0IjoxNTc4NjcxNDA4LCJleHAiOjE1Nzg2NzUwMDh9.Q7rEsJ6b-qYY1jghoiHhYULAUxTfOwmBTSJ1R2DE5hM'
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6IlBhdGllbnQiLCJmaXJzdE5hbWUiOiJQYXRpZW5jZSIsImxhc3ROYW1lIjoiUGVhcnNvbiIsIm5hbWUiOiJQYXRpZW5jZV9QZWFyc29uIiwiZW1haWwiOiJwYXRpZW5jZS5wZWFyc29uQGNvbXBhbnkuY29tIiwiYWRkcmVzczEiOiIxMjMgRnJhbmNpc2NhbiBCbHZkIiwiYWRkcmVzczIiOiIiLCJjaXR5IjoiU2FuIEZyYW5jaXNjbyIsInN0YXRlIjoiQ0EiLCJwaW5jb2RlIjoiOTQwMDEiLCJqdGkiOiJiOTY1MjhiMy01M2RmLTRmMzctYWI4Zi1kNWQzMmI0ZTNiZjkiLCJpYXQiOjE1Nzg2NzE0MDgsImV4cCI6MTU3ODY3NTAwOH0.Jhb_AnLOzqMjF_FugwspsOi9tRKAsfLTHnrVb9KHeX4'
   // decoded data
   const data = parseJwt(token) // handle error with try catch
 
   function goTo(path) {
-    history.push(`${path}/${token}`)
+    path = `${path}/${token}`
+    if (path.indexOf('/password') > -1) {
+      path = `${path}/${token}`
+    }
+    history.push(path)
   }
   
   return (

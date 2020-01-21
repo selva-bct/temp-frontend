@@ -17,11 +17,13 @@ export const EditSignup = () => {
   } catch (error) {
     token && alert("loks like the token is tampered")
     console.log("Error while decoding token :: ", error)
+    history.push('/auth/login')
   }
   console.log('parsed Token Data :: ', data)
 
   function goTo(path) {
-    history.push(`${path}/${token}`)
+    // generate the new token with the updated data in this page
+    history.push(`${path}/${token}/${token}`)
   }
 
   const { register, handleSubmit, errors } = useForm({
@@ -97,7 +99,7 @@ export const EditSignup = () => {
           </span>
         </div>
 
-        <button className='correct' onClick={() => goTo('/auth/signup/correct')}>Everything is correct</button>
+        <button className='correct' onClick={() => goTo('/auth/signup/password')}>Everything is correct</button>
       </form >
     </div>
   )

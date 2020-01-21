@@ -1,11 +1,11 @@
 import clientReducer from './client-reducer';
-import loginReducer from './auth-reducer';
+import authReducer from './auth-reducer';
 
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   client: clientReducer,
-  login: loginReducer
+  auth: authReducer
 });
 
 export default rootReducer;

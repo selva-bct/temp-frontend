@@ -39,9 +39,8 @@ export function* login(action) {
     const reqData = { url: constant.login, data, method: 'post' };
     const { token } = yield call(httpCall, reqData);
     yield put(setClient(token));
-    yield put({ type: LOGIN_SUCCESS });
     localStorage.setItem('token', JSON.stringify(token));
-    history.push(constant.dashboard);
+    yield put({ type: LOGIN_SUCCESS });
   } catch (error) {
     console.log('Error while loggin in :: ', error);
     yield put({ type: LOGIN_ERROR, error });
