@@ -2,14 +2,15 @@ import React from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup';
-
+import { useDispatch } from 'react-redux';
 import { parseJwt } from '../../utils/jwt-util';
 import './signup.scss';
+
 
 export const EditSignup = () => {
   const history = useHistory();
   const { token } = useParams();
-
+  const dispatch = useDispatch();
   // decoded data
   let data = {}
   try {
@@ -20,11 +21,6 @@ export const EditSignup = () => {
     history.push('/auth/login')
   }
   console.log('parsed Token Data :: ', data)
-
-  function goTo(path) {
-    // generate the new token with the updated data in this page
-    history.push(`${path}/${token}/${token}`)
-  }
 
   const { register, handleSubmit, errors } = useForm({
     mode: 'onBlur',
@@ -51,7 +47,11 @@ export const EditSignup = () => {
     submitFocusError: true,
     nativeValidation: false,
   })
-  const onSubmit = data => { console.log(data); }
+  const onSubmit = data => {
+    // dispatch({ type: 'USER_INFO_EDIT', data })
+    const path = '/auth/signup/password'
+    history.push(`${path}/${token}/${token}`)
+   }
 
   return (
     <div className='container'>
@@ -72,7 +72,7 @@ export const EditSignup = () => {
         </div>
         <div className='form-group'>
           <label className='form-label' htmlFor="email">Email</label>
-          <input className='form-input' id="email" type="text" name="email" placeholder="please enter your email" ref={register} />
+          <input className='form-input' disabled id="email" type="text" name="email" placeholder="please enter your email" ref={register} />
           <span className='error'>
             {errors.email && <div> {errors.email.message}</div>}
           </span>
@@ -99,7 +99,7 @@ export const EditSignup = () => {
           </span>
         </div>
 
-        <button className='correct' onClick={() => goTo('/auth/signup/password')}>Everything is correct</button>
+        <button className='correct' >Everything is correct</button>
       </form >
     </div>
   )

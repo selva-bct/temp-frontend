@@ -103,7 +103,8 @@ export const PasswordSetup = () => {
             {errors.subscribe && <div>{errors.subscribe.message}</div>}
           </span>
         </div>
-
+        <div>{state.status === 409 && 'User already exists'} </div>
+        <div>{state.status && state.status === 500 && 'Oops something went wrong'} </div>
         <input type='submit' className='correct' value='Create Account' />
         <input type='reset'className='correct' value='Reset'/>
       </form >

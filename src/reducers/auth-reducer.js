@@ -65,10 +65,11 @@ const reducer = function (state = initialState, action) {
       return {
         ...state,
         login: {
-          errors: state.errors.concat([{
+          errors: state.login.errors.concat([{
             body: action.error.toString(),
             time: new Date(),
           }]),
+          status: action.error.response ? action.error.response.status : 500,
           messages: [],
           requesting: false,
           successful: false,
@@ -102,11 +103,12 @@ const reducer = function (state = initialState, action) {
       return {
         ...state,
         register: {
-          errors: state.errors.concat([{
+          errors: state.register.errors.concat([{
             body: action.error.toString(),
             time: new Date(),
           }]),
           messages: [],
+          status: action.error.response ? action.error.response.status : 500,
           requesting: false,
           successful: false,
         }
@@ -139,7 +141,7 @@ const reducer = function (state = initialState, action) {
       return {
         ...state,
         forgotPassword: {
-          errors: state.errors.concat([{
+          errors: state.forgotPassword.errors.concat([{
             body: action.error.toString(),
             time: new Date(),
           }]),
@@ -174,9 +176,9 @@ const reducer = function (state = initialState, action) {
       return {
         ...state,
         changePassword: {
-          errors: state.errors.concat([{
+          errors: state.changePassword.errors.concat([{
             body: action.error.toString(),
-            time: new Date(),
+            time: new Date()
           }]),
           messages: [],
           requesting: false,

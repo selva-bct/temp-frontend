@@ -1,10 +1,6 @@
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+
 export const Dashboard = () => {
-  const history = useHistory()
-  useEffect(() => {
-    history.push('/auth/signup/fdb')
-  });
   
   return (
     <div>Dashboard</div>

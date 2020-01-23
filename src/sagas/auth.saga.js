@@ -13,10 +13,6 @@ import {
   CHANGE_PASSWORD_SUCCESS
 } from '../constant/auth.constant';
 import constant from '../constant/general';
-import {
-  setClient,
-  unsetClient,
-} from '../actions/client/client.actions';
 
 /**
  * Generic method to serve the network request
@@ -37,9 +33,7 @@ export function* login(action) {
     console.log("Into login api...")
     const { data } = action;
     const reqData = { url: constant.login, data, method: 'post' };
-    const { token } = yield call(httpCall, reqData);
-    yield put(setClient(token));
-    localStorage.setItem('token', JSON.stringify(token));
+    yield call(httpCall, reqData);
     yield put({ type: LOGIN_SUCCESS });
   } catch (error) {
     console.log('Error while loggin in :: ', error);
@@ -64,14 +58,6 @@ export function* register(action) {
     console.log('Error while regsistering user :: ', error);
     yield put({ type: REGISTER_ERROR, error });
   }
-
-}
-
-export function* logout() {
-
-  yield put(unsetClient());
-  localStorage.removeItem('token');
-  history.push('/login');
 
 }
 
