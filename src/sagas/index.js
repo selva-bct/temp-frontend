@@ -4,13 +4,17 @@ import {
   LOGIN_REQUESTING,
   REGISTER_REQUESTING,
   FORGOT_PASSWORD_REQUESTING,
-  CHANGE_PASSWORD_REQUESTING
+  RESET_PASSWORD_REQUESTING,
+  CHANGE_PASSWORD_REQUESTING,
+  INVITE_USER
 } from './../constant/auth.constant';
 import {
   login,
   register,
   forgotPassword,
-  changePassword
+  changePassword,
+  resetPassword,
+  inviteUser
 } from './auth.saga';
 
 export default function* rootSaga() {
@@ -18,4 +22,6 @@ export default function* rootSaga() {
   yield takeLatest(REGISTER_REQUESTING, register);
   yield takeLatest(CHANGE_PASSWORD_REQUESTING, changePassword);
   yield takeLatest(FORGOT_PASSWORD_REQUESTING, forgotPassword);
+  yield takeLatest(RESET_PASSWORD_REQUESTING, resetPassword);
+  yield takeLatest(INVITE_USER, inviteUser)
 };

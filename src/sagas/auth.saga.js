@@ -7,10 +7,14 @@ import {
   LOGIN_ERROR,
   REGISTER_SUCCESS,
   REGISTER_ERROR,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_ERROR,
   FORGOT_PASSWORD_ERROR,
   FORGOT_PASSWORD_SUCCESS,
   CHANGE_PASSWORD_ERROR,
-  CHANGE_PASSWORD_SUCCESS
+  CHANGE_PASSWORD_SUCCESS,
+  INVITE_USER_SUCCESS,
+  INVITE_USER_ERROR
 } from '../constant/auth.constant';
 import constant from '../constant/general';
 
@@ -89,4 +93,32 @@ export function* forgotPassword(action) {
     yield put({ type: FORGOT_PASSWORD_ERROR, error });
   }
 
+}
+
+export function* resetPassword(action) {
+
+  try {
+    console.log("Into reset password api...", action);
+    const { data } = action;
+    const reqData = { url: constant.resetPassword, data, method: 'post' };
+    yield call(httpCall, reqData);
+    yield put({ type: RESET_PASSWORD_SUCCESS });
+  } catch (error) {
+    console.log('Error while r peseting assword :: ', error);
+    yield put({ type: RESET_PASSWORD_ERROR, error });
+  }
+
+}
+
+export function* inviteUser(action) {
+  try {
+    console.log("Into invite api...", action);
+    const { data } = action;
+    const reqData = { url: constant.inviteUser, data, method: 'post' };
+    yield call(httpCall, reqData);
+    yield put({ type: INVITE_USER_SUCCESS });
+  } catch (error) {
+    console.log('Error while inviting user :: ', error);
+    yield put({ type: INVITE_USER_ERROR, error });
+  }
 }

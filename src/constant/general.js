@@ -16,7 +16,9 @@ const constant = {
   logout: '/users/logout',
   changePassword: '/users/change-password',
   forgotPassword: '/users/forgot-password',
-  dashboard: '/dashboard'
+  resetPassword: '/users/reset-password',
+  dashboard: '/dashboard',
+  inviteUser: '/users/invite'
 }
 
 export default constant

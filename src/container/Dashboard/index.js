@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup';
 
 export const Dashboard = () => {
-  
+
+  const dispatch = useDispatch()
   const { register, handleSubmit, errors } = useForm({
     mode: 'onBlur',
     reValidateMode: 'onChange',
@@ -35,9 +37,10 @@ export const Dashboard = () => {
     validateCriteriaMode: "firstErrorDetected",
     submitFocusError: true,
     nativeValidation: false,
-  })
+  });
+
   const onSubmit = data => {
-    console.log("data :: ", data)
+    dispatch({ type: 'INVITE_USER', data });
   }
 
   return (
@@ -73,14 +76,14 @@ export const Dashboard = () => {
         </div>
         <div className='form-group'>
           <label className='form-label' htmlFor="email">Email</label>
-          <input className='form-input' disabled id="email" type="text" name="email" placeholder="please enter your email" ref={register} />
+          <input className='form-input' id="email" type="text" name="email" placeholder="please enter your email" ref={register} />
           <span className='error'>
             {errors.email && <div> {errors.email.message}</div>}
           </span>
         </div>
         <div className='form-group'>
           <label className='form-label' htmlFor="email">Role</label>
-          <select name="role" ref={register}>
+          <select name="providerType" ref={register}>
             <option value="patient">patient</option>
             <option value="provider">provider</option>
           </select>

@@ -8,7 +8,7 @@ export default function configResponseInterceptor(axios) {
     if (response.config.url.indexOf('/login') > -1) {
       token = response.data.data.AuthenticationResult.AccessToken;
     } else {
-      token = response.headers.authorization;
+      token = response.headers.authorization || null;
     }
     setItem('geptoken', token);
     return response;

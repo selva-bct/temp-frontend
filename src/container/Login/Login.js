@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import * as yup from 'yup';
+import { Link } from 'react-router-dom'
+
 
 import './Login.scss';
 import { LOGIN_REQUESTING } from './../../constant/auth.constant';
@@ -28,8 +30,9 @@ export const Login = () => {
     reValidateMode: 'onChange',
     defaultValues: {},
     validationSchema: yup.object().shape({
-      username: yup.string('please enter an valid username')
-        .required('Please enter a username'),
+      username: yup.string('please enter an your email id')
+                   .email('please enter an valid email')
+                   .required('email is required'),
       password: yup.string().required('please enter password'),
     }),
     validateCriteriaMode: "firstErrorDetected",
@@ -64,6 +67,7 @@ export const Login = () => {
         <div>{state.status && state.status !== 401 && 'Oops something went wrong'} </div>
         <input type='submit' className='correct'/>
       </form >
+      <Link to='/auth/forgot-password'>Forgot password</Link>
     </div>
   )
 

@@ -3,7 +3,8 @@ export const setItem = (key, value) => {
 }
 
 export const getItem = (key) => {
-  return JSON.parse(localStorage.getItem(key))
+  const data = localStorage.getItem(key) || null
+  return JSON.parse(data)
 }
 
 export const removeItem = (key) => {

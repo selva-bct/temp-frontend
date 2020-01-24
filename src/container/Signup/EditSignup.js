@@ -43,7 +43,7 @@ export const EditSignup = () => {
       pincode: yup.string().required('please enter pincode'),
       email: yup.string()
         .email('please enter an valid email')
-        .required('please enter last name'),
+        .required('email is required'),
     }),
     validateCriteriaMode: "firstErrorDetected",
     submitFocusError: true,

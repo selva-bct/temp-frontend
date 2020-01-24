@@ -11,6 +11,9 @@ import {
   REGISTER_REQUESTING,
   FORGOT_PASSWORD_REQUESTING,
   CHANGE_PASSWORD_REQUESTING,
+  RESET_PASSWORD_REQUESTING,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_ERROR,
   AUTH_INITIALIZE
 } from '../constant/auth.constant'
 
@@ -26,6 +29,7 @@ const initialState = {
   register: data,
   forgotPassword: data,
   changePassword: data,
+  resetPassword: data,
 
 }
 
@@ -115,13 +119,50 @@ const reducer = function (state = initialState, action) {
       };
 
     // FORGOT PASSWORD REDUCER CASE
+    case RESET_PASSWORD_REQUESTING:
+      return {
+        ...state,
+        resetPassword: {
+          requesting: true,
+          successful: false,
+          messages: [{ body: 'Requesting for forgot password...', time: new Date() }],
+          errors: [],
+        }
+      };
+
+    case RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        resetPassword: {
+          errors: [],
+          messages: [{ body: 'Successfully requested forgot password', time: new Date() }],
+          requesting: false,
+          successful: true,
+        }
+      };
+
+    case RESET_PASSWORD_ERROR:
+      return {
+        ...state,
+        resetPassword: {
+          errors: state.resetPassword.errors.concat([{
+            body: action.error.toString(),
+            time: new Date(),
+          }]),
+          messages: [{ body: 'Error requesting forgot password', time: new Date() }],
+          requesting: false,
+          successful: false,
+        }
+      };
+
+    // FORGOT PASSWORD REDUCER CASE
     case FORGOT_PASSWORD_REQUESTING:
       return {
         ...state,
         forgotPassword: {
           requesting: true,
           successful: false,
-          messages: [{ body: 'Registering...', time: new Date() }],
+          messages: [{ body: 'Requesting for forgot password...', time: new Date() }],
           errors: [],
         }
       };
@@ -131,7 +172,7 @@ const reducer = function (state = initialState, action) {
         ...state,
         forgotPassword: {
           errors: [],
-          messages: [],
+          messages: [{ body: 'Successfully requested forgot password', time: new Date() }],
           requesting: false,
           successful: true,
         }
@@ -145,7 +186,7 @@ const reducer = function (state = initialState, action) {
             body: action.error.toString(),
             time: new Date(),
           }]),
-          messages: [],
+          messages: [{ body: 'Error requesting forgot password', time: new Date() }],
           requesting: false,
           successful: false,
         }
