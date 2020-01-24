@@ -3,6 +3,8 @@ import { useHistory, useParams } from "react-router-dom";
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
+
+import { setItem } from './../../utils/storage';
 import { parseJwt } from '../../utils/jwt-util';
 import './signup.scss';
 
@@ -49,6 +51,8 @@ export const EditSignup = () => {
   })
   const onSubmit = data => {
     // dispatch({ type: 'USER_INFO_EDIT', data })
+    data.name = data.email
+    setItem('updatedUser', data)
     const path = '/auth/signup/password'
     history.push(`${path}/${token}/${token}`)
    }

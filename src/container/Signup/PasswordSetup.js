@@ -5,40 +5,32 @@ import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { parseJwt } from '../../utils/jwt-util';
+import { getItem, removeItem } from './../../utils/storage';
 import './signup.scss';
 import { REGISTER_REQUESTING } from '../../constant/auth.constant';
 
 export const PasswordSetup = () => {
   const history = useHistory();
-  const { token, updatedToken } = useParams();
   const dispatch = useDispatch();
   const state = useSelector(state => (state.auth.register));
   // checks if the user has logged in
   useEffect(() => {
     if (state.successful !== null && state.successful) {
+      removeItem('updatedUser')
       history.push('/login');
     }
   })
-
-  // decoded data
-  let data = {}
-  let updatedTokenData = {}
-  try {
-    data = parseJwt(token) || {}
-    updatedTokenData = parseJwt(updatedToken) || {}
-  } catch (error) {
-    token && alert('looks like the token is tampered')
-    console.log('Error while decoding token :: ', error)
+  let updatedUser = getItem('updatedUser')
+  if (!updatedUser) {
     history.push('/auth/login')
   }
-  console.log('parsed Token Data :: ', data, updatedTokenData)
-
+ 
   const { register, handleSubmit, errors } = useForm({
     mode: 'onBlur',
     reValidateMode: 'onChange',
     defaultValues: {
-      password: updatedTokenData.password,
-      confirmPassword: updatedTokenData.confirmPassword,
+      password: '',
+      confirmPassword: '',
       termsAndCondition: false,
       subscribe: true
     },
@@ -54,7 +46,7 @@ export const PasswordSetup = () => {
     nativeValidation: false,
   })
   const onSubmit = formData => {
-    const reqObj = { ...formData, ...updatedTokenData }
+    const reqObj = { ...formData, ...updatedUser }
     dispatch({ type: REGISTER_REQUESTING, data: reqObj })
   }
 

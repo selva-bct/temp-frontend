@@ -1,7 +1,7 @@
 import React from 'react';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import { useHistory, useParams } from "react-router-dom";
 
+import { setItem } from './../../utils/storage';
 import { parseJwt } from './../../utils/jwt-util';
 import './signup.scss';
 
@@ -16,6 +16,7 @@ export const Signup = () => {
 
   function goTo(path) {
     path = `${path}/${token}`
+    setItem('updatedUser', data)
     if (path.indexOf('/password') > -1) {
       path = `${path}/${token}`
     }

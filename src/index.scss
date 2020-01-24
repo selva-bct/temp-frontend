@@ -14,7 +14,8 @@ code {
 
 
 // temp code need to be removed
-.not-correct, .correct {
+.not-correct,
+.correct {
   width: 200px;
   height: 54px;
   border-radius: 8px;
@@ -31,6 +32,10 @@ code {
   width: 400px;
 }
 
+.container-center {
+  margin: auto;
+  width: 400px;
+}
 .form-group {
   margin-bottom: .4rem;
   height: 80px;
@@ -53,6 +58,7 @@ code {
 
   input[type=password].form-input,
   input[type=email].form-input,
+  select,
   input[type=text].form-input {
     -webkit-appearance: none;
     -moz-appearance: none;
