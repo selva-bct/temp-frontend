@@ -15,7 +15,7 @@ import {
   CHANGE_PASSWORD_SUCCESS,
   INVITE_USER_SUCCESS,
   INVITE_USER_ERROR
-} from '../constant/auth.constant';
+} from '../constant/auth';
 import constant from '../constant/general';
 
 /**

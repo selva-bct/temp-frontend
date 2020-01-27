@@ -1,3 +1,5 @@
+import { get } from 'lodash';
+
 import {
   LOGIN_REQUESTING,
   LOGIN_SUCCESS,
@@ -15,15 +17,15 @@ import {
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_ERROR,
   AUTH_INITIALIZE
-} from '../constant/auth.constant'
+} from '../constant/auth'
 
 const data = {
   requesting: false,
   successful: null,
-  messages: [],
-  errors: [],
+  messages: []
 }
 
+const defaultErrorMessage = 'Oops something went wrong';
 const initialState = {
   login: data,
   register: data,
@@ -70,11 +72,10 @@ const reducer = function (state = initialState, action) {
         ...state,
         login: {
           errors: state.login.errors.concat([{
-            body: action.error.toString(),
+            body: get(action, 'error.response.data.message', defaultErrorMessage),
             time: new Date(),
+            status: get(action, 'error.response.status', 500)
           }]),
-          status: action.error.response ? action.error.response.status : 500,
-          messages: [],
           requesting: false,
           successful: false,
         }

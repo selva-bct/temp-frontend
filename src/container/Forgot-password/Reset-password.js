@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 import './Reset-password.scss';
-import { RESET_PASSWORD_REQUESTING } from '../../constant/auth.constant';
+import { RESET_PASSWORD_REQUESTING } from '../../constant/auth';
 
 export const ResetPassword = () => {
 

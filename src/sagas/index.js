@@ -7,7 +7,7 @@ import {
   RESET_PASSWORD_REQUESTING,
   CHANGE_PASSWORD_REQUESTING,
   INVITE_USER
-} from './../constant/auth.constant';
+} from './../constant/auth';
 import {
   login,
   register,

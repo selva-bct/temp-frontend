@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { parseJwt } from '../../utils/jwt-util';
 import { getItem, removeItem } from './../../utils/storage';
 import './signup.scss';
-import { REGISTER_REQUESTING } from '../../constant/auth.constant';
+import { REGISTER_REQUESTING } from '../../constant/auth';
 
 export const PasswordSetup = () => {
   const history = useHistory();

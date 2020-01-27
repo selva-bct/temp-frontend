@@ -1,22 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from "react-router-dom";
-
+import { useDispatch } from 'react-redux';
 import { setItem } from './../../utils/storage';
 import { parseJwt } from './../../utils/jwt-util';
-import './signup.scss';
 
+import './signup.scss';
+import { axios } from './../../config/api-client';
+import { fetchUserByToken } from './../../actions/user';
 export const Signup = () => {
   const history = useHistory();
   let { token } = useParams();
-  if (!token || token.length < 30) {
-    token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6IlBhdGllbnQiLCJmaXJzdE5hbWUiOiJQYXRpZW5jZSIsImxhc3ROYW1lIjoiUGVhcnNvbiIsIm5hbWUiOiJQYXRpZW5jZV9QZWFyc29uIiwiZW1haWwiOiJwYXRpZW5jZS5wZWFyc29uQGNvbXBhbnkuY29tIiwiYWRkcmVzczEiOiIxMjMgRnJhbmNpc2NhbiBCbHZkIiwiYWRkcmVzczIiOiIiLCJjaXR5IjoiU2FuIEZyYW5jaXNjbyIsInN0YXRlIjoiQ0EiLCJwaW5jb2RlIjoiOTQwMDEiLCJqdGkiOiJiOTY1MjhiMy01M2RmLTRmMzctYWI4Zi1kNWQzMmI0ZTNiZjkiLCJpYXQiOjE1Nzg2NzE0MDgsImV4cCI6MTU3ODY3NTAwOH0.Jhb_AnLOzqMjF_FugwspsOi9tRKAsfLTHnrVb9KHeX4'
-  }
-  // decoded data
-  const data = parseJwt(token) // handle error with try catch
+  const dispatch = useDispatch();
+  const [ userData, setUserData ] = useState()
+  useEffect(()=> {
+    // dispatch(fetchUserByToken(token))
+    async function getUser() {
+      try {
+        const { data: { data } } = await axios.get(`/users/token/${token}`)
+        setUserData(data)
+        console.log("data within method :: ", data)
+      } catch (error) {
+        console.log('error while fetching user', error)
 
+      }
+    }
+    getUser()
+  })
+  
   function goTo(path) {
     path = `${path}/${token}`
-    setItem('updatedUser', data)
+    // setItem('updatedUser', data)
     if (path.indexOf('/password') > -1) {
       path = `${path}/${token}`
     }
@@ -26,7 +39,7 @@ export const Signup = () => {
   return (
     <div>
       <pre>
-        {JSON.stringify(data, null, 2)}
+        {JSON.stringify(userData, null, 2)}
       </pre>
       <button className='not-correct' onClick={() => goTo('/auth/signup/edit')}>Incorrect information or not you?</button>
       <br />

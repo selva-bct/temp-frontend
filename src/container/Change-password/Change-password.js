@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 import './Change-password.scss';
-import { CHANGE_PASSWORD_REQUESTING } from './../../constant/auth.constant';
+import { CHANGE_PASSWORD_REQUESTING } from './../../constant/auth';
 
 export const ChangePassword = () => {
 
