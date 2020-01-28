@@ -1,14 +1,22 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-
+import { get } from 'lodash';
 import './Change-password.scss';
 import { CHANGE_PASSWORD_REQUESTING } from './../../constant/auth';
 
 export const ChangePassword = () => {
 
   const dispatch = useDispatch()
+  const state = useSelector(state => (state.auth.changePassword));
+  
+  useEffect(() => {
+    // need to change the below code
+    if (state.successful !== null && state.successful) {
+      dispatch({ type: 'AUTH_INITIALIZE' })
+    }
+  });
 
   const { register, handleSubmit, errors } = useForm({
     mode: 'onBlur',
@@ -60,6 +68,13 @@ export const ChangePassword = () => {
             {errors.confirmPassword && <div> {errors.confirmPassword.message} </div>}
           </span>
         </div>
+        {/* Error display block */}
+        {
+          state.successful === false &&
+          <div className='error'>
+            { get(state,'errors[0].body') }
+          </div>
+        }
 
         <input type='submit' className='correct' />
         <input type='reset' className='correct' value='Reset' />

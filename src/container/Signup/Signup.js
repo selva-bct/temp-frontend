@@ -6,14 +6,12 @@ import { parseJwt } from './../../utils/jwt-util';
 
 import './signup.scss';
 import { axios } from './../../config/api-client';
-import { fetchUserByToken } from './../../actions/user';
 export const Signup = () => {
   const history = useHistory();
   let { token } = useParams();
   const dispatch = useDispatch();
   const [ userData, setUserData ] = useState()
   useEffect(()=> {
-    // dispatch(fetchUserByToken(token))
     async function getUser() {
       try {
         const { data: { data } } = await axios.get(`/users/token/${token}`)
@@ -21,13 +19,15 @@ export const Signup = () => {
         console.log("data within method :: ", data)
       } catch (error) {
         console.log('error while fetching user', error)
-
+        // Todo :: display error toast or alert popup then navigate to login screen
+        history.push('/auth/login')
       }
     }
     getUser()
-  })
+  }, [])
   
   function goTo(path) {
+    setItem('updatedUser', userData)
     path = `${path}/${token}`
     // setItem('updatedUser', data)
     if (path.indexOf('/password') > -1) {

@@ -5,12 +5,13 @@ export default function configResponseInterceptor(axios) {
     // Do something with response data
     // update the token into localstorage
     let token
-    if (response.config.url.indexOf('/login') > -1) {
-      token = response.data.data.AuthenticationResult.AccessToken;
-    } else {
-      token = response.headers.authorization || null;
-    }
-    setItem('geptoken', token);
+    // Todo: update the localstorage witht hte updated token from backend
+    // if (response.config.url.indexOf('/login') > -1) {
+    //   token = response.data.data.AuthenticationResult.AccessToken;
+    // } else {
+    //   token = response.headers.authorization || null;
+    // }
+    // setItem('geptoken', token);
     return response;
   }, function (error) {
     // Do something with response error

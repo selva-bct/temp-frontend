@@ -15,10 +15,11 @@ export const Dashboard = () => {
       lastName: '',
       addressLine1: '',
       addressLine2: '',
+      addressLine3: '',
       providerType: '',
       city: '',
       state: '',
-      pincode: '',
+      zipCode: '',
       email: ''
     },
     validationSchema: yup.object().shape({
@@ -26,10 +27,11 @@ export const Dashboard = () => {
       lastName: yup.string().required('please enter last name'),
       addressLine1: yup.string().required('please enter address line 1'),
       addressLine2: yup.string().required('please enter address line 2'),
+      addressLine3: yup.string().required('please enter address line 3'),
       providerType: yup.string().required('please enter user role'),
       city: yup.string().required('please enter city'),
       state: yup.string().required('please enter state'),
-      pincode: yup.string().required('please enter pincode'),
+      zipCode: yup.string().required('please enter zip code'),
       email: yup.string()
         .email('please enter an valid email')
         .required('please enter last name'),
@@ -69,11 +71,20 @@ export const Dashboard = () => {
         </div>
         <div className='form-group'>
           <label className='form-label' htmlFor="addressLine2">address Line 2</label>
-          <input className='form-input' id="addressLine2" type="text" name="addressLine2" placeholder="please enter your addreee" ref={register} />
+          <input className='form-input' id="addressLine2" type="text" name="addressLine2" placeholder="please enter your address" ref={register} />
           <span className='error'>
             {errors.addressLine2 && <div> {errors.addressLine2.message} </div>}
           </span>
         </div>
+        
+        <div className='form-group'>
+          <label className='form-label' htmlFor="addressLine3">address Line 3</label>
+          <input className='form-input' id="addressLine3" type="text" name="addressLine3" placeholder="please enter your address" ref={register} />
+          <span className='error'>
+            {errors.addressLine3 && <div> {errors.addressLine3.message} </div>}
+          </span>
+        </div>
+        
         <div className='form-group'>
           <label className='form-label' htmlFor="email">Email</label>
           <input className='form-input' id="email" type="text" name="email" placeholder="please enter your email" ref={register} />
@@ -106,10 +117,10 @@ export const Dashboard = () => {
           </span>
         </div>
         <div className='form-group'>
-          <label className='form-label' htmlFor="pincode">pincode</label>
-          <input className='form-input' id="pincode" type="text" name="pincode" placeholder="please enter your pincode" ref={register} />
+          <label className='form-label' htmlFor="zipCode">zip code</label>
+          <input className='form-input' id="zipCode" type="text" name="zipCode" placeholder="please enter your zipCode" ref={register} />
           <span className='error'>
-            {errors.pincode && <div>{errors.pincode.message}</div>}
+            {errors.zipCode && <div>{errors.zipCode.message}</div>}
           </span>
         </div>
 

@@ -15,9 +15,9 @@ export const PasswordSetup = () => {
   const state = useSelector(state => (state.auth.register));
   // checks if the user has logged in
   useEffect(() => {
-    if (state.successful !== null && state.successful) {
+    if (state.successful) {
       removeItem('updatedUser')
-      history.push('/login');
+      history.push('/auth/login');
     }
   })
   let updatedUser = getItem('updatedUser')
@@ -51,7 +51,7 @@ export const PasswordSetup = () => {
   }
 
   return (
-    <div className='container'>
+    <div className='container-center'>
       <form onSubmit={handleSubmit(onSubmit)} >
 
         <div className='form-group'>

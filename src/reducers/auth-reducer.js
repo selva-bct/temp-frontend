@@ -27,10 +27,11 @@ const data = {
 
 const defaultErrorMessage = 'Oops something went wrong';
 const initialState = {
+  changePassword: JSON.parse(JSON.stringify(data)),
   login: data,
   register: data,
   forgotPassword: data,
-  changePassword: data,
+  
   resetPassword: data,
 
 }
@@ -109,8 +110,9 @@ const reducer = function (state = initialState, action) {
         ...state,
         register: {
           errors: state.register.errors.concat([{
-            body: action.error.toString(),
+            body: get(action, 'error.response.data.message', defaultErrorMessage),
             time: new Date(),
+            status: get(action, 'error.response.status', 500)
           }]),
           messages: [],
           status: action.error.response ? action.error.response.status : 500,
@@ -147,8 +149,9 @@ const reducer = function (state = initialState, action) {
         ...state,
         resetPassword: {
           errors: state.resetPassword.errors.concat([{
-            body: action.error.toString(),
+            body: get(action, 'error.response.data.message', defaultErrorMessage),
             time: new Date(),
+            status: get(action, 'error.response.status', 500)
           }]),
           messages: [{ body: 'Error requesting forgot password', time: new Date() }],
           requesting: false,
@@ -184,7 +187,7 @@ const reducer = function (state = initialState, action) {
         ...state,
         forgotPassword: {
           errors: state.forgotPassword.errors.concat([{
-            body: action.error.toString(),
+            body: get(action, 'error.response.data.message', defaultErrorMessage),
             time: new Date(),
           }]),
           messages: [{ body: 'Error requesting forgot password', time: new Date() }],
@@ -219,7 +222,7 @@ const reducer = function (state = initialState, action) {
         ...state,
         changePassword: {
           errors: state.changePassword.errors.concat([{
-            body: action.error.toString(),
+            body: get(action, 'error.response.data.message', defaultErrorMessage),
             time: new Date()
           }]),
           messages: [],

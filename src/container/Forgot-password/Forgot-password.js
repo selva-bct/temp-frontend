@@ -1,14 +1,22 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-
+import { get } from 'lodash';
 import './Reset-password.scss';
 import { FORGOT_PASSWORD_REQUESTING } from '../../constant/auth';
 
 export const ForgotPassword = () => {
 
   const dispatch = useDispatch()
+  const state = useSelector(state => (state.auth.forgotPassword));
+  
+  useEffect(() => {
+    // need to change the below code
+    if (state.successful !== null && state.successful) {
+      dispatch({ type: 'AUTH_INITIALIZE' })
+    }
+  });
 
   const { register, handleSubmit, errors } = useForm({
     mode: 'onBlur',
@@ -39,6 +47,13 @@ export const ForgotPassword = () => {
             {errors.email && <div>{errors.email.message}</div>}
           </span>
         </div>
+        {/* Error display block */}
+        {
+          state.successful === false &&
+          <div className='error'>
+            { get(state,'errors[0].body') }
+          </div>
+        }
         <input type='submit' className='correct' />
       </form >
     </div>
